@@ -342,6 +342,8 @@ wcnss_trigger_config(struct platform_device *pdev)
 
 	penv->thermal_mitigation = 0;
 
+	penv->thermal_mitigation = 0;
+
 	penv->gpios_5wire = platform_get_resource_byname(pdev, IORESOURCE_IO,
 							"wcnss_gpios_5wire");
 
