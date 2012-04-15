@@ -1952,7 +1952,6 @@ static int hub_port_reset(struct usb_hub *hub, int port1,
 			struct usb_device *udev, unsigned int delay, bool warm)
 {
 	int i, status;
-	u16 portstatus, portchange = 0;
 
 	if (!warm) {
 		down_read(&ehci_cf_port_reset_rwsem);
@@ -3103,8 +3102,8 @@ static void hub_events(void)
 	struct device *hub_dev;
 	u16 hubstatus;
 	u16 hubchange;
-	u16 portstatus;
-	u16 portchange;
+	u16 portstatus = 0;
+	u16 portchange = 0;
 	int i, ret;
 #if defined(CONFIG_USB_PEHCI_HCD) || defined(CONFIG_USB_PEHCI_HCD_MODULE)
 	int j;
