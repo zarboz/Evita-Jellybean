@@ -1952,6 +1952,7 @@ static int hub_port_reset(struct usb_hub *hub, int port1,
 			struct usb_device *udev, unsigned int delay, bool warm)
 {
 	int i, status;
+	u16 portstatus, portchange = 0;
 
 	if (!warm) {
 		down_read(&ehci_cf_port_reset_rwsem);
