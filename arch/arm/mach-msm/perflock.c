@@ -162,13 +162,10 @@ static int __init perflock_screen_policy_init(void)
 late_initcall(perflock_screen_policy_init);
 #endif
 
-#if 0
-static unsigned int policy_min = CONFIG_MSM_CPU_FREQ_ONDEMAND_MIN;
-static unsigned int policy_max = CONFIG_MSM_CPU_FREQ_ONDEMAND_MAX;
-#else
+
 static unsigned int policy_min;
 static unsigned int policy_max;
-#endif
+
 static int param_set_cpu_min_max(const char *val, struct kernel_param *kp)
 {
 	int ret;
@@ -383,20 +380,11 @@ void perf_lock_init(struct perf_lock *lock, unsigned int type,
 }
 EXPORT_SYMBOL(perf_lock_init);
 
-#ifdef CONFIG_CPU_FREQ_GOV_ONDEMAND
-extern bool is_governor_ondemand(void);
-extern bool is_ondemand_locked(void);
-#endif
+
 static void do_set_rate_fn(struct work_struct *work)
 {
 	struct cpufreq_freqs freqs;
 	int ret = 0;
-#ifdef CONFIG_CPU_FREQ_GOV_ONDEMAND
-	if(is_governor_ondemand() && is_ondemand_locked()) {
-		pr_info("[K] perflock ignore setrate, ondemand governor locked\n");
-		return;
-	}
-#endif
 	freqs.new = perflock_override(NULL, 0);
 	freqs.cpu = smp_processor_id();
 	cpufreq_notify_transition(&freqs, CPUFREQ_PRECHANGE);
