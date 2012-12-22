@@ -112,7 +112,7 @@ static int update_cpu_max_freq(struct cpufreq_policy *cpu_policy,
 	return ret;
 }
 
-static void check_temp(struct work_struct *work )
+static void check_temp(struct work_struct *work)
 {
 	struct cpufreq_policy *cpu_policy = NULL;
 	struct tsens_device tsens_dev0;
@@ -558,4 +558,3 @@ static int __init msm_thermal_init(void)
 	return ret;
 }
 fs_initcall(msm_thermal_init);
-
