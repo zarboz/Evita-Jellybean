@@ -124,6 +124,13 @@
 #include <mach/perflock.h>
 #endif
 
+#ifdef CONFIG_CMDLINE_OPTIONS
+	/* setters for cmdline_gpu */
+	int set_kgsl_3d0_freq(unsigned int freq0, unsigned int freq1);
+	int set_kgsl_2d0_freq(unsigned int freq);
+	int set_kgsl_2d1_freq(unsigned int freq);
+#endif
+	
 #ifdef CONFIG_BT
 #include <mach/htc_bdaddress.h>
 #endif
@@ -5975,7 +5982,18 @@ static void __init elite_init(void)
 	if(!cpu_is_krait_v1())
 		set_two_phase_freq(1134000);
 #endif
-
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS_2_PHASE
+	set_two_phase_freq_badass(CONFIG_CPU_FREQ_GOV_BADASS_2_PHASE_FREQ);
+#endif
+#ifdef CONFIG_CPU_FREQ_GOV_BADASS_3_PHASE
+	set_three_phase_freq_badass(CONFIG_CPU_FREQ_GOV_BADASS_3_PHASE_FREQ);
+#endif
+#ifdef CONFIG_CMDLINE_OPTIONS
+	/* setters for cmdline_gpu */
+	set_kgsl_3d0_freq(cmdline_3dgpu[0], cmdline_3dgpu[1]);
+	set_kgsl_2d0_freq(cmdline_2dgpu);
+	set_kgsl_2d1_freq(cmdline_2dgpu);
+#endif
 	
 	if (!(board_mfg_mode() == 6 || board_mfg_mode() == 7))
 		elite_add_usb_devices();
