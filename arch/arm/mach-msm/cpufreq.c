@@ -72,7 +72,7 @@ static int override_cpu;
  */
 
 /* to be safe, fill vars with defaults */
-uint32_t cmdline_maxkhz = 1512000, cmdline_minkhz = 192000;
+uint32_t cmdline_maxkhz = CONFIG_MSM_CPU_FREQ_MAX, cmdline_minkhz = 192000;
 
 #ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_ASSWAX
 char cmdline_gov[16] = "AssWax";
@@ -94,6 +94,9 @@ char cmdline_gov[16] = "ondemand";
 #endif
 #ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_PERFORMANCE
 char cmdline_gov[16] = "performance";
+#endif
+#ifdef CONFIG_CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
+char cmdline_gov[16] = "intellidemand";
 #endif
 
 uint32_t cmdline_maxscroff = 486000;
