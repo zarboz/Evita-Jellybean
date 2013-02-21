@@ -943,13 +943,13 @@ ext4_move_extents(struct file *o_filp, struct file *d_filp,
 		last_extent = mext_next_extent(orig_inode,
 					holecheck_path, &ext_cur);
 		if (last_extent < 0) {
-			ret1 = last_extent;
+			ret = last_extent;
 			goto out;
 		}
 		last_extent = mext_next_extent(orig_inode, orig_path,
 							&ext_dummy);
 		if (last_extent < 0) {
-			ret1 = last_extent;
+			ret = last_extent;
 			goto out;
 		}
 		seq_start = le32_to_cpu(ext_cur->ee_block);
@@ -963,7 +963,7 @@ ext4_move_extents(struct file *o_filp, struct file *d_filp,
 	if (le32_to_cpu(ext_cur->ee_block) > block_end) {
 		ext4_debug("ext4 move extent: The specified range of file "
 							"may be the hole\n");
-		ret1 = -EINVAL;
+		ret = -EINVAL;
 		goto out;
 	}
 
@@ -983,7 +983,7 @@ ext4_move_extents(struct file *o_filp, struct file *d_filp,
 		last_extent = mext_next_extent(orig_inode, holecheck_path,
 						&ext_cur);
 		if (last_extent < 0) {
-			ret1 = last_extent;
+			ret = last_extent;
 			break;
 		}
 		add_blocks = ext4_ext_get_actual_len(ext_cur);
@@ -1088,12 +1088,7 @@ out:
 		kfree(holecheck_path);
 	}
 	double_up_write_data_sem(orig_inode, donor_inode);
-	ret2 = mext_inode_double_unlock(orig_inode, donor_inode);
+	mext_inode_double_unlock(orig_inode, donor_inode);
 
-	if (ret1)
-		return ret1;
-	else if (ret2)
-		return ret2;
-
-	return 0;
+	return ret;
 }

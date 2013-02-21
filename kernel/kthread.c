@@ -296,7 +296,10 @@ bool queue_kthread_work(struct kthread_worker *worker,
 
 	spin_lock_irqsave(&worker->lock, flags);
 	if (list_empty(&work->node)) {
-		insert_kthread_work(worker, work, &worker->work_list);
+		list_add_tail(&work->node, &worker->work_list);
+		work->queue_seq++;
+		if (likely(worker->task))
+			wake_up_process(worker->task);
 		ret = true;
 	}
 	spin_unlock_irqrestore(&worker->lock, flags);
