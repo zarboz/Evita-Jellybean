@@ -486,7 +486,7 @@ static int futex_lock_pi_atomic(u32 __user *uaddr, struct futex_hash_bucket *hb,
 				struct futex_pi_state **ps,
 				struct task_struct *task, int set_waiters)
 {
-	int lock_taken, ret, ownerdied = 0;
+	int lock_taken, ret, force_take = 0;
 	u32 uval, newval, curval, vpid = task_pid_vnr(task);
 
 retry:

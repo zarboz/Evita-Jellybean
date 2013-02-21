@@ -264,6 +264,7 @@ int snd_card_info_done(void);
 int snd_component_add(struct snd_card *card, const char *component);
 int snd_card_file_add(struct snd_card *card, struct file *file);
 int snd_card_file_remove(struct snd_card *card, struct file *file);
+void snd_card_unref(struct snd_card *card);
 
 #define snd_card_set_dev(card, devptr) ((card)->dev = (devptr))
 
