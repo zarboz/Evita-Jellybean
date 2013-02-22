@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -551,6 +551,9 @@ typedef struct sap_SoftapStats_s {
    v_U32_t rxRate;
 } tSap_SoftapStats, *tpSap_SoftapStats;
 
+
+int sapSetPreferredChannel(struct net_device *dev, tANI_U8* ptr);
+void sapCleanupChannelList(void);
 
 /*==========================================================================
   FUNCTION    WLANSAP_Set_WpsIe

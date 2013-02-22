@@ -110,6 +110,8 @@ source "drivers/staging/keucr/Kconfig"
 
 source "drivers/staging/bcm/Kconfig"
 
+source "drivers/staging/prima/Kconfig"
+
 source "drivers/staging/ft1000/Kconfig"
 
 source "drivers/staging/speakup/Kconfig"

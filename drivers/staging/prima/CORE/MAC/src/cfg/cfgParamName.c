@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -292,6 +292,7 @@ unsigned char *gCfgParamName[] = {
     (unsigned char *)"ENABLE_LTE_COEX",
     (unsigned char *)"AP_KEEP_ALIVE_TIMEOUT",
     (unsigned char *)"GO_KEEP_ALIVE_TIMEOUT",
+    (unsigned char *)"ENABLE_MC_ADDR_LIST",
 };
 
 

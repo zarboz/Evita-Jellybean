@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -363,6 +363,7 @@ typedef struct sLimMlmScanReq
 
 #ifdef WLAN_FEATURE_P2P
     tANI_BOOLEAN   p2pSearch;
+    tANI_BOOLEAN   skipDfsChnlInP2pSearch;
 #endif
     tANI_U16           uIEFieldLen;
     tANI_U16           uIEFieldOffset;

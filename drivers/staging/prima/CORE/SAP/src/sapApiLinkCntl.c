@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -161,7 +161,8 @@ WLANSAP_ScanCallback
                 break;
             }
 
-            operChannel = sapSelectChannel(halHandle, pResult);
+            operChannel = sapSelectChannel(halHandle, psapContext, pResult);
+
             sme_ScanResultPurge(halHandle, pResult);
             break;
 

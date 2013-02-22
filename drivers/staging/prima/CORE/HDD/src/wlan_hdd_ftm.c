@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012, Code Aurora Forum. All rights reserved.
+ * Copyright (c) 2012-2013, The Linux Foundation. All rights reserved.
  *
  * Previously licensed under the ISC license by Qualcomm Atheros, Inc.
  *
@@ -2288,10 +2288,9 @@ int wlan_hdd_ftm_set_nv_field
          {
             nvField->fieldData.macAddr[VOS_MAC_ADDRESS_LEN - 1] =
                                                lastByteMAC + macLoop;
-            if ((macLoop * NV_FIELD_MAC_ADDR_SIZE) < (sizeof(pNVMac) / sizeof(int)))
-                vos_mem_copy(pNVMac + (macLoop * NV_FIELD_MAC_ADDR_SIZE),
-                                 &nvField->fieldData.macAddr[0],
-                                 NV_FIELD_MAC_ADDR_SIZE);
+            vos_mem_copy(pNVMac + (macLoop * NV_FIELD_MAC_ADDR_SIZE),
+                         &nvField->fieldData.macAddr[0],
+                         NV_FIELD_MAC_ADDR_SIZE);
          }
          break;
 
@@ -2607,6 +2606,9 @@ void wlan_hdd_process_ftm_cmd
 #endif /* FEATURE_WLAN_INTEGRATED_SOC */        
 
     ENTER();
+
+    //Delay to fix NV write failure on JB
+    vos_busy_wait(10000); //10ms
 
     if (!pRequestBuf) {
 
